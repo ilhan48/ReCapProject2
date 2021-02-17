@@ -42,19 +42,14 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Car car)
         {
-            Car carToUpdate = _cars.SingleOrDefault(c => c.Id == car.Id);
-            carToUpdate.Id = car.Id;
+            Car carToUpdate = _cars.SingleOrDefault(c => c.Id == car.Id);            
             carToUpdate.BrandId = car.BrandId;
             carToUpdate.ColorId = car.ColorId;
             carToUpdate.DailyPrice = car.DailyPrice;
             carToUpdate.ModelYear = car.ModelYear;
             carToUpdate.Description = car.Description;
         }
-        public List<Car> GetAllById(int id)
-        {
-            return _cars.Where(c => c.Id == id).ToList();
-        }
-
+        
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
             throw new NotImplementedException();
@@ -63,6 +58,11 @@ namespace DataAccess.Concrete.InMemory
         public Car Get(Expression<Func<Car, bool>> filter)
         {
             throw new NotImplementedException();
+        }
+        public Car GetById(int id)
+        {
+            Car car = _cars.SingleOrDefault(c => c.Id == id);
+            return car;
         }
 
         public List<CarDetailDto> GetCarDetails()
